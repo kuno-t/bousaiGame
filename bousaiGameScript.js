@@ -23,8 +23,8 @@ function questionChoice(){
     var bousaiJSON;
     var QNum,INum; //QuestionNumber,ImageNumber
     $.getJSON(dataUrl,bousaiJSON => {
-        Qnum = MAth.floor(Math.random()*bousaiJSON.question.length);
-        Inum = MAth.floor(Math.random()*bousaiJSON.question[Qnum].image.length);
+        Qnum = Math.floor(Math.random()*bousaiJSON.question.length);
+        Inum = Math.floor(Math.random()*bousaiJSON.question[Qnum].image.length);
         console.log(bousaiJSON.question.length,"\n",bousaiJSON.question[Qnum].text,"\n",bousaiJSON.question[Qnum].image.length);
     });
 }
