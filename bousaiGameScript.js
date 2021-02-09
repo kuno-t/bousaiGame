@@ -6,6 +6,8 @@ const answerTextArea = document.getElementById("answerTextArea");
 const answerButton = document.getElementById("answerButton");
 const playerName = "ダミーくん"; //あとで別ページで入力させたものを呼び出すか、もしくは名前入力欄を作る
 const choiceNum = 3; //選択肢数は3
+const dataUrl = 'bousaiGameData.json';
+const bousaiJSON;
 
 //関数
 function answerButtonOnClick(){
@@ -18,8 +20,6 @@ function answerButtonOnClick(){
 }
 
 function startButtonOnClick(){
-    const dataUrl = 'bousaiGameData.json';
-    var bousaiJSON;
     var QNum,INum; //QuestionNumber,ImageNumber
     $.getJSON(dataUrl,bousaiJSON => {
         let Qnum = Math.floor(Math.random()*bousaiJSON.question.length); //Question決定。完成時にはサーバーサイドで決める
