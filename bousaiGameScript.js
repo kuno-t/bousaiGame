@@ -6,7 +6,6 @@ const answerTextArea = document.getElementById("answerTextArea");
 const answerButton = document.getElementById("answerButton");
 const playerName = "ダミーくん"; //あとで別ページで入力させたものを呼び出すか、もしくは名前入力欄を作る
 const choiceNum = 3; //選択肢数は3
-var bousaiJSON; //JSONが入る
 
 //関数
 function answerButtonOnClick(){
@@ -19,19 +18,24 @@ function answerButtonOnClick(){
 }
 
 function startButtonOnClick(){
-    let Qnum = Math.floor(Math.random()*bousaiJSON.question.length); //Question決定。完成時にはサーバーサイドで決める
-    let imageList = bousaiJSON.question[Qnum].image;
-    let image = [];
-    let numList = randoms(choiceNum,imageList.length); //完成時にはサーバーサイドから受け取る
-    for(let i=0;i<choiceNum;i++){ //画像を規定の数選ぶ。choiceNumは定数で一括変更可能。
-        image[i] = imageList[numList[i]]; //image決定
-    }
-    console.log(image);
+    const dataUrl = 'bousaiGameData.json';
+    var bousaiJSON;
+    var QNum,INum; //QuestionNumber,ImageNumber
+    $.getJSON(dataUrl,bousaiJSON => {
+        let Qnum = Math.floor(Math.random()*bousaiJSON.question.length); //Question決定。完成時にはサーバーサイドで決める
+        let imageList = bousaiJSON.question[Qnum].image;
+        let image = [];
+        let numList = randoms(choiceNum,imageList.length); //完成時にはサーバーサイドから受け取る
+        for(let i=0;i<choiceNum;i++){ //画像を規定の数選ぶ。choiceNumは定数で一括変更可能。
+            image[i] = imageList[numList[i]]; //image決定
+        }
+        console.log(image);
 
-    questionText.innerHTML = bousaiJSON.question[Qnum].text;
-    for(var i=0; i<choiceNum; i++){
-        document.getElementById(`imageFrame${i+1}`).innerHTML = `<img src="${image[i].src}" alt="${image[i].alt}" title="選択肢${i+1}" class="choicesImage" id="choiceImage${i+1}">`; // ``の中に${}で変数展開
-    }
+        questionText.innerHTML = bousaiJSON.question[Qnum].text;
+        for(var i=0; i<choiceNum; i++){
+            document.getElementById(`imageFrame${i+1}`).innerHTML = `<img src="${image[i].src}" alt="${image[i].alt}" title="選択肢${i+1}" class="choicesImage" id="choiceImage${i+1}">`; // ``の中に${}で変数展開
+        }
+    });
 }
 
 function randoms(num,max){ //重複無しの乱数発生装置。これはテストプレイ用。完成時にはサーバーサイドで全プレイヤーに共通のものを渡す必要がある
@@ -53,20 +57,6 @@ function randoms(num,max){ //重複無しの乱数発生装置。これはテス
 // 紐付け
 answerButton.onclick = answerButtonOnClick;
 startButton.onclick = startButtonOnClick;
-
-//jQuery記述
-function questionChoice(){
-    const dataUrl = 'bousaiGameData.json';
-    var bousaiJSON;
-    var QNum,INum; //QuestionNumber,ImageNumber
-    $.getJSON(dataUrl,bousaiJSON => {
-        Qnum = Math.floor(Math.random()*bousaiJSON.question.length);
-        Inum = Math.floor(Math.random()*bousaiJSON.question[Qnum].image.length);
-        console.log(bousaiJSON.question.length,"\n",bousaiJSON.question[Qnum].text,"\n",bousaiJSON.question[Qnum].image.length);
-    });
-}
-window.onload = questionChoice;
-
 
 /* こっちはデバッグ 
 var bousaiJSON = {
