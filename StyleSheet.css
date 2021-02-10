@@ -2,10 +2,14 @@ body {
     background: #eeeeee;
 }
 
+.questionContainer{
+    position: relative;
+}
+
 .question {
     background: #FFFFFF;
     font-size: 15px;
-    width: 500px;
+    width: 400px;
     padding: 10px;
     text-align: center;
     border: 2px solid #bbbbbb;
@@ -35,18 +39,26 @@ body {
     height: 100%;
 }
 
+.answer {
+    margin: 0px auto;
+    width: 360px;
+}
+
 .displayAnswer{
     background: #FFFFFF;
     border: 2px solid #888888;
-    width: 340px;
-    height: 100px;
+    width: 150px;
+    height: 60px;
     overflow: auto;
     padding: 10px;
     margin: 10px auto;
     font-size: 12px;
 }
 
-.answer {
-    margin: 0px auto;
-    width: 360px;
+.displayAnswerContainer{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px auto;
 }
