@@ -7,39 +7,50 @@
     <link rel="stylesheet" href="StyleSheet.css">
   </head>
   <body>
-    <div class="question" id="questionText">
-      現在、待機中です。<br>
-      新たにゲームを開始したい場合は、<br>
-      下の開始ボタンを押してみてください。<br>
-      参加者が全員開始ボタンを押すことで、<br>
-      ゲームが始まります。<br>
-      <button id="startButton" type="button">開始</button>
-    </div>
-    <div class="choicesImageContainer">
-      <div class="choicesImageFrame" id="imageFrame1">
-
+    <div class="questionContainer">
+      <div class="question" id="questionText">
+        現在、待機中です。<br>
+        新たにゲームを開始したい場合は、<br>
+        下の開始ボタンを押してみてください。<br>
+        参加者が全員開始ボタンを押すことで、<br>
+        ゲームが始まります。<br>
+        <button id="startButton" type="button">開始</button>
       </div>
-      <div class="choicesImageFrame" id="imageFrame2">
+      <div class="choicesImageContainer">
+        <div class="choicesImageFrame" id="imageFrame1">
 
+        </div>
+        <div class="choicesImageFrame" id="imageFrame2">
+
+        </div>
+        <div class="choicesImageFrame" id="imageFrame3">
+
+        </div>
       </div>
-      <div class="choicesImageFrame" id="imageFrame3">
 
+      <div class="answer">
+        <textarea id="answerTextArea" cols="50" rows="5" placeholder="ここに入力"></textarea><br>
+        <button id="answerButton" type="button">送信</button>
+      </div>
+    </div>
+    <div class = "displayAnswerContainer">
+      <div class="displayAnswer" id="displayAnswer1">
+        プレイヤー1<br>
+    </div>
+      <div class="displayAnswer" id="displayAnswer2">
+        プレイヤー2<br>
+      </div>
+      <div class="displayAnswer" id="displayAnswer3">
+        プレイヤー3<br>
+      </div>
+      <div class="displayAnswer" id="displayAnswer4">
+        プレイヤー4<br>
+      </div>
+      <div class="displayAnswer" id="displayAnswer5">
+        プレイヤー5<br>
       </div>
     </div>
 
-    <div class="displayAnswer" id="displayAnswer">
-      A:ここにどれくらい入るとちょうどいいかテスト<br>
-      B:ここに2行くらいかな<br>
-      C:3行くらいかな<br>
-      D:4行行けるかな<br>
-      E:5行目どうかな<br>
-      F:スクロールできるかな<br>
-      G:長すぎるとどうかなどうかなどうかなどうかなどうかなどうかなどうかな<br>
-    </div>
-    <div class="answer">
-      <textarea id="answerTextArea" cols="50" rows="5" placeholder="ここに入力"></textarea><br>
-      <button id="answerButton" type="button">送信</button>
-    </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   </body>
   <script type="text/javascript" src="bousaiGameScript.js"></script>
