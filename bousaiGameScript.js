@@ -1,7 +1,7 @@
 //各種定数の宣言
 const questionText = document.getElementById("questionText");
 const startButton = document.getElementById("startButton");
-const displayAnswer = document.getElementById("displayAnswer");
+const displayAnswer = document.getElementById("displayAnswer1"); //デバッグ用に固定にしている。後で入れ替える
 const answerTextArea = document.getElementById("answerTextArea");
 const answerButton = document.getElementById("answerButton");
 const playerName = "ダミーくん"; //あとで別ページで入力させたものを呼び出すか、もしくは名前入力欄を作る
