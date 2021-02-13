@@ -38,7 +38,7 @@ function startButtonOnClick(){
 
         questionText.innerHTML = bousaiJSON.question[Qnum].text;
         for(var i=0; i<choiceNum; i++){
-            document.getElementById(`imageFrame${i+1}`).innerHTML = `<img src="${image[i].src}" alt="${image[i].alt}" title="選択肢${i+1}" class="choicesImage" id="choiceImage${i+1}">`; // ``の中に${}で変数展開
+            document.getElementById(`imageFrame${i+1}`).innerHTML = `<img src="${image[i].src}" alt="${image[i].alt}" title="選択肢${i+1}" class="choicesImage" id="choiceImage${i+1}" onclick="imageOnClick('#choiceImage${i+1}')">`; // ``の中に${}で変数展開
         }
     });
 }
