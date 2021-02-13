@@ -1,22 +1,27 @@
-//各種定数の宣言
+//各種定数・変数の宣言
 const questionText = document.getElementById("questionText");
 const startButton = document.getElementById("startButton");
-const displayAnswer = document.getElementById("displayAnswer1"); //デバッグ用に固定にしている。後で入れ替える
+const displayAnswer = [document.getElementById("displayAnswer1"),document.getElementById("displayAnswer2"),document.getElementById("displayAnswer3"),document.getElementById("displayAnswer4"),document.getElementById("displayAnswer5")];
 const answerTextArea = document.getElementById("answerTextArea");
 const answerButton = document.getElementById("answerButton");
-const playerName = "ダミーくん"; //あとで別ページで入力させたものを呼び出すか、もしくは名前入力欄を作る
-const choiceNum = 3; //選択肢数は3
+const seat = document.getElementsByClassName('seat');
+const choiceNum = 3; //選択肢数は暫定3
 const dataUrl = 'bousaiGameData.json';
-var bousaiJSON;
+var bousaiJSON; //JSONが入る
+var playerNum = -1;
+var playerName = "ダミーくん"; //あとで別ページで入力させたものを呼び出すか、もしくは名前入力欄を作る
 
 //関数
-function answerButtonOnClick(){
+function answerButtonOnClick(){ //テキスト欄からの書き込みを行う
+    if(playerNum === -1){
+        return; //プレイヤー未定なら何もしない
+    }
     let answerText = answerTextArea.value;
     let answerTextHTML = answerText.replace(/\n/g,'<br>'); //普通だと一個置き換えた時点で終わるので正規表現を使う
     console.log(answerText);
-    displayAnswer.innerHTML += playerName+":<br>"+answerTextHTML; //HTMLとして出力
+    displayAnswer[playerNum].innerHTML += playerName+":<br>"+answerTextHTML; //HTMLとして出力
     answerTextArea.value = ''; //テキストエリアをクリア
-    displayAnswer.scrollTop = displayAnswer.scrollHeight; //scrollTopは現在スクロール位置、scrollHeightは現在のスクロール可能な高さ。 これで一番下まで強制でスクロールする。
+    displayAnswer[playerNum].scrollTop = displayAnswer[playerNum].scrollHeight; //scrollTopは現在スクロール位置、scrollHeightは現在のスクロール可能な高さ。 これで一番下まで強制でスクロールする。
 }
 
 function startButtonOnClick(){
@@ -38,6 +43,18 @@ function startButtonOnClick(){
     });
 }
 
+function imageOnClick(imageId){ //画像クリック時呼び出し
+    console.log($(imageId).attr('alt'));
+    answerTextArea.value += $(imageId).attr('alt');
+}
+
+$(function(){
+    $('.seat').on('click', function(){ //着席ボタンで呼び出し
+        console.log($(this).attr('data-num'));
+        playerNum = $(this).attr('data-num') - 1;
+    });
+});
+
 function randoms(num,max){ //重複無しの乱数発生装置。これはテストプレイ用。完成時にはサーバーサイドで全プレイヤーに共通のものを渡す必要がある
     console.log(num,max)
     var randoms = [];
@@ -57,6 +74,7 @@ function randoms(num,max){ //重複無しの乱数発生装置。これはテス
 // 紐付け
 answerButton.onclick = answerButtonOnClick;
 startButton.onclick = startButtonOnClick;
+//imageOnClickはHTMLを書き込む時にHTML側に直接記述される
 
 /* こっちはデバッグ 
 var bousaiJSON = {
@@ -94,10 +112,4 @@ var bousaiJSON = {
     }
     ]
 };
-
-$(function(){
-    Qnum = Math.floor(Math.random()*bousaiJSON.question.length);
-    Inum = Math.floor(Math.random()*bousaiJSON.question[Qnum].image.length);
-    console.log(bousaiJSON.question.length,"\n",bousaiJSON.question[Qnum].text,"\n",bousaiJSON.question[Qnum].image.length);
-});
 */
